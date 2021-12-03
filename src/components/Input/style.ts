@@ -1,9 +1,7 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-export const Form = styled.div `
-      margin:20px;
-      display:block;
-      align-items: center;
+export const FormContainer= styled.div ` 
+ 
         
  h1{
    border-bottom: 1px solid white;
@@ -44,12 +42,8 @@ export const Form = styled.div `
    font-weight: 500;
    margin: 5px;
  }
-
- .error {
-   color: red;
-   font-family: sans-serif;
-   font-size: 12px;
-   height: 30px;
+ input:focus{
+     background-color: #2C2061;
+     
  }
-
-`;
+`

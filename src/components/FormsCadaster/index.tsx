@@ -1,38 +1,79 @@
 import React, { useContext } from 'react';
 import { FormsContext } from '../../context/FormsCadasterContext';
+import Button from '../Button';
+import { Input } from '../Input';
 import * as S from './style';
-
 
 export default function FormsCadaster() {
    
-    const { checkCep,register,errors,setError} = useContext(FormsContext)
+    const { checkCep,register,errors,setError,handleSubmit} = useContext(FormsContext)
     
-   
-
+  function handlelogin(values) {
+      console.log(values)
+  }
     return (
         <S.Form>
-   <form >
+   <form onSubmit={ handleSubmit( handlelogin ) }    >
       
-      <label >Nome</label>
-      <input {...register("name", { required: true })}  placeholder="Primeiro Nome" name="name" /> 
+     " <Input
+         {...register("name")}   
+        name="name"
+        label="Nome"
+        placeholder="Nome"
+     
+     /> 
+     <Input 
+     {...register("cep")}
+     name="cep"
+     label="Cep"
+     placeholder="Cep"
+     onBlur={ checkCep }
+     />
+
+   <Input
    
-     <label >Cep</label>
-      <input {...register("cep",{required:true})} placeholder="Cep"  onBlur={ checkCep } />
-        
-     <label >Bairro</label>
-      <input {...register("neighborhood")} placeholder="Bairro" name="neighborhood" />  
-      <label>Cidade</label>
-      <input {...register("andress")} placeholder="Logradouro" name="andress"/>
-    <label>Uf</label>
-      <input {...register("uf")} placeholder="Uf" name="uf" />      
-    <label >Complemento</label>
-      <input {...register("andressNumber")} placeholder="Número" name="numero" />
+   {...register("neighborhood")}
+   label="Bairro"
+   name="neighborhood"
+   placeholder="Bairro"
       
-  
+
+   />
+     <Input 
+      {...register("city")}
+   label="Cidade "
+   name="cidade"
+   placeholder="Cidade"
+     />   
+     <Input 
+     {...register("andress")}
+     placeholder="Logradouro"
+      name="andress"
+      label="Endereço"
+     />
+     <Input 
+    {...register("uf")}
+    placeholder="Uf"
+    name="uf"
+    label="Estado"
+     />
+      
+      <Input 
+      {...register("andressNumber")}
+     placeholder="Número"
+    name="numero"
+    label="Complemento"
+     />
+      
+      
+   <Button  >
+        Logar
+     </Button>
      
     
-      <input type="submit" className='submitButton' />
+     
     </form>
+    
         </S.Form>
 
 

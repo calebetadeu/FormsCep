@@ -1,7 +1,7 @@
 
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { createContext, ReactNode, useEffect } from 'react';
-import { FieldError, useForm, UseFormRegister, UseFormSetError } from 'react-hook-form';
+import { FieldError, useForm, UseFormHandleSubmit, UseFormRegister, UseFormSetError } from 'react-hook-form';
 import { schema } from '../components/FormsCadaster/schema';
 import api from '../services/api';
 import type { AndressProps, FormInputs } from '../types/Forms';
@@ -12,6 +12,7 @@ interface FormsContextData  {
    checkCep:(e:React.SyntheticEvent)=>void;
    register: UseFormRegister<FormInputs>;
   setError: UseFormSetError<FormInputs>;
+  handleSubmit: UseFormHandleSubmit<FormInputs>
    errors:{ 
       name?: FieldError  
     cep?: FieldError;
@@ -31,7 +32,7 @@ type FormsProviderProps={
 export const FormsContext = createContext<FormsContextData>({} as FormsContextData)
 
 export function FormsProvider({children} : FormsProviderProps ){
-    const { register,setValue ,setFocus,formState:{errors},setError} = useForm<FormInputs>({
+    const { register,setValue ,setFocus,formState:{errors},setError, handleSubmit} = useForm<FormInputs>({
       resolver:yupResolver(schema)
     });
 
@@ -73,7 +74,7 @@ const checkCep= async (e:React.SyntheticEvent )=>{
    } 
 
     return (
-        <FormsContext.Provider value={{checkCep,register,errors,setError}  } >
+        <FormsContext.Provider value={{checkCep,register,errors,setError,handleSubmit}  } >
                 {children}
         </FormsContext.Provider>
     )
