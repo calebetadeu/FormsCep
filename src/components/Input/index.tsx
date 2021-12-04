@@ -9,7 +9,7 @@ const InputBase:ForwardRefRenderFunction<HTMLInputElement, InputProps >=({label,
         <S.FormContainer>
              
       <label > {label} </label>
-      <input   placeholder={ placeholder } name={name} ref={ref} {...rest} /> 
+      <input className="inputStyle"  placeholder={ placeholder } name={name} ref={ref} {...rest} /> 
         </S.FormContainer>
     )
 }

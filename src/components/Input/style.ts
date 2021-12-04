@@ -32,6 +32,15 @@ export const FormContainer= styled.div `
    box-sizing: border-box;
    padding: 10px;
    width: 100%;
+   &:focus {
+    color: #000;
+    font-weight: 500;
+    border-bottom: 2px solid ;
+    transition: all 0.2s ease-in;
+    transform: scaleX(1.02) translateY(-3px);   
+    opacity: 6;
+    background-color: #E16F7C ;
+    }
  }
 
  label {
@@ -41,9 +50,11 @@ export const FormContainer= styled.div `
    font-size: 14px;
    font-weight: 500;
    margin: 5px;
+  
+        &:hover{
+            filter: brightness(0.9);
+        }
+
  }
- input:focus{
-     background-color: #2C2061;
-     
- }
+ 
 `

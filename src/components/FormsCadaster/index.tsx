@@ -67,7 +67,7 @@ export default function FormsCadaster() {
       
       
    <Button  >
-        Logar
+        Enviar
      </Button>
      
     

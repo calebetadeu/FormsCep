@@ -5,8 +5,3 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     name?: string
     
 }
-export interface InputFunctionProps extends InputProps {
-    onBlur?: (e:React.SyntheticEvent)=>void
-  onChange?: (e:React.SyntheticEvent)=>void
-    onClick?:()=>void
-}
