@@ -19,7 +19,11 @@ button{
 
  
   transition: filter 0.2s;
-
+&:disabled{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
   &:hover {
     filter: brightness(0.8);
   } 

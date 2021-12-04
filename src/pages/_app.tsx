@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app'
 import Header from '../components/Header'
-import { FormsProvider } from '../context/FormsCadasterContext'
+import { FormsProvider } from '../hooks/UseFormProvider'
 import { GlobalStyle } from '../styles/GlobalStyle'
 import '../styles/GlobalStyle.ts'
 

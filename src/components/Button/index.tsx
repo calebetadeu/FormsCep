@@ -3,13 +3,14 @@ import * as S from './style'
 
 interface  ButtonProps {
   children:ReactNode
-  
+ OnClick?:()=>void 
+ disabled:boolean
 } 
 
-export default function Button( { children }:ButtonProps  ) {
+export default function Button( { children,OnClick,disabled }:ButtonProps  ) {
     return (
         <S.ButtonStyle>      
-      <button type="submit" className='submitButton' >
+      <button type="submit" className='submitButton' onClick={OnClick} disabled={disabled}  >
             {children}
       </button>
         </S.ButtonStyle>

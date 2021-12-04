@@ -9,7 +9,7 @@ export interface FormInputs  {
     andressNumber?:string
   }
   export type AndressProps= {
-      
+    cep:string  
     logradouro:string
     bairro:string
     localidade:string

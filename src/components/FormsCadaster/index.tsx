@@ -1,49 +1,54 @@
 import { useRouter } from 'next/router';
-import React, { useContext, useState } from 'react';
-import { FormsContext } from '../../context/FormsCadasterContext';
+import React, { useContext } from 'react';
+import { FormsContext } from '../../hooks/UseFormProvider';
 import Button from '../Button';
 import { Input } from '../Input';
 import * as S from './style';
 
 export default function FormsCadaster() {
    
-    const { checkCep,handleSubmit,errors,register,message} = useContext(FormsContext)
-    const [ messageError,setMessageError ] = useState('')
+    const { checkCep,
+      handleSubmit,
+      register,message,
+      handleOnChangeError,
+      inputController,
+      handlePagination,
+      buttonController
+    } = useContext(FormsContext)
+   
     const router= useRouter()
 
   
-  function handlelogin(e) {
-    router.push('/test')
-     
-  }
     return (
         <S.Form>
-   <form onSubmit={ handleSubmit( handlelogin ) }    >
+   <form    >
       
-     " <Input
-         {...register("name")}   
+      <Input
+         {...register("name",{
+           required:true
+         })}   
         name="name"
-        label="Nome"
-        placeholder="Nome"
+        label="Nome*"
+        placeholder="Nome*"
      
      /> 
      <Input 
      {...register("cep",{
-       required:true,
-      maxLength:8,
-      
      } 
      )} 
      name="cep"
-     label="Cep"
-     placeholder="Cep"
+     label="Cep*"
+     placeholder="Cep*"
     onBlur={ checkCep }
-     
+     onChange={handleOnChangeError}
+     type="number"
+     value={inputController}
+     maxLength={8}
     />
        
-{errors.cep &&  (
-         <span  > {messageError} </span>
-       )}
+
+         <span className='messageError' > {message} </span>
+      
    
    <Input
    
@@ -81,7 +86,7 @@ export default function FormsCadaster() {
      />
       
       
-   <Button   >
+   <Button disabled={buttonController} >
         Enviar
      </Button>
      

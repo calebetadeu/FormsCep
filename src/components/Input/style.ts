@@ -3,16 +3,7 @@ import styled from 'styled-components'
 export const FormContainer= styled.div ` 
  
       
- h1{
-   border-bottom: 1px solid white;
-   color: #3d3d3d;
-   font-family: sans-serif;
-   font-size: 20px;
-   font-weight: 600;
-   line-height: 24px;
-   padding: 10px;
-   text-align: center;
- }
+ 
 
  form {
    background:var(--gray-50) ;
@@ -25,23 +16,28 @@ export const FormContainer= styled.div `
    padding: 40px 70px;
    border-radius: 10px;
  }
-
+ input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
  input {
    border: 1px solid #d9d9d9;
    border-radius: 10px;
    box-sizing: border-box;
-   padding: 10px;
+   padding: 8px;
    width: 100%;
    &:focus {
     color: #fff;
     font-weight: 600;
     border-bottom: 2px solid ;
     transition: all 0.2s ease-in;
-    transform: scaleX(1.02) translateY(-3px);   
+    transform: scaleX(1.03);   
     opacity: 6;
     background-color: #4F646F;
     ::placeholder{
       color: #C0C5C1;
+      transform: scaleX(0.94);
     }
     }
  }
@@ -50,7 +46,7 @@ export const FormContainer= styled.div `
    color: #000000;
    display: block;
    font-family: sans-serif;
-   font-size: 14px;
+   font-size: 16px;
    font-weight: 500;
    margin: 5px;
   
