@@ -3,9 +3,10 @@ import * as S from './style'
 
 interface  ButtonProps {
   children:ReactNode
+  
 } 
 
-export default function Button( { children  }:ButtonProps  ) {
+export default function Button( { children }:ButtonProps  ) {
     return (
         <S.ButtonStyle>      
       <button type="submit" className='submitButton' >

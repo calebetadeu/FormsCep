@@ -1,8 +1,6 @@
 
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { createContext, ReactNode, useEffect } from 'react';
-import { FieldError, useForm, UseFormHandleSubmit, UseFormRegister, UseFormSetError } from 'react-hook-form';
-import { schema } from '../components/FormsCadaster/schema';
+import { createContext, ReactNode, useEffect, useState } from 'react';
+import { FieldError, useForm, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import api from '../services/api';
 import type { AndressProps, FormInputs } from '../types/Forms';
 
@@ -11,8 +9,8 @@ import type { AndressProps, FormInputs } from '../types/Forms';
 interface FormsContextData  {
    checkCep:(e:React.SyntheticEvent)=>void;
    register: UseFormRegister<FormInputs>;
-  setError: UseFormSetError<FormInputs>;
   handleSubmit: UseFormHandleSubmit<FormInputs>
+  message: string;
    errors:{ 
       name?: FieldError  
     cep?: FieldError;
@@ -32,9 +30,9 @@ type FormsProviderProps={
 export const FormsContext = createContext<FormsContextData>({} as FormsContextData)
 
 export function FormsProvider({children} : FormsProviderProps ){
-    const { register,setValue ,setFocus,formState:{errors},setError, handleSubmit} = useForm<FormInputs>({
-      resolver:yupResolver(schema)
-    });
+
+    const [message,setMessage]= useState('')
+    const { register,setValue ,setFocus,formState:{errors},setError, handleSubmit,} = useForm<FormInputs>()
 
  
 
@@ -47,10 +45,12 @@ useEffect(() => {
 const checkCep= async (e:React.SyntheticEvent )=>{
     let target= e.target as HTMLInputElement;
     const cep= target.value.replace(/\D/g,'');
+
+
     if(!target.value){
-      return 
+      return setMessage('Esse Campo Obrigatório')
     }
-    
+   
     try{ 
       const response= await api.get(`https://viacep.com.br/ws/${cep}/json`)
    const data:AndressProps=await response.data
@@ -59,12 +59,15 @@ const checkCep= async (e:React.SyntheticEvent )=>{
       setValue("city", data.localidade)
       setValue("uf", data.uf)
       
+      
       if(!data.bairro ){
         return setFocus("neighborhood")
+        
       }
-      if (!data.complemento) {  
+      
+        
       setFocus("andressNumber")
-      }
+      
     
     
     }catch(e){
@@ -74,7 +77,7 @@ const checkCep= async (e:React.SyntheticEvent )=>{
    } 
 
     return (
-        <FormsContext.Provider value={{checkCep,register,errors,setError,handleSubmit}  } >
+        <FormsContext.Provider value={{checkCep,register,errors,handleSubmit,message}}>
                 {children}
         </FormsContext.Provider>
     )

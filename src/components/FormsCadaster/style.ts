@@ -4,7 +4,9 @@ export const Form = styled.div `
       margin:20px;
       display:block;
       align-items: center;
-        
+        span{
+          color:#cc3300 ;
+        }
  h1{
    border-bottom: 1px solid white;
    color: #3d3d3d;
@@ -45,11 +47,5 @@ export const Form = styled.div `
    margin: 5px;
  }
 
- .error {
-   color: red;
-   font-family: sans-serif;
-   font-size: 12px;
-   height: 30px;
- }
-
+ 
 `;

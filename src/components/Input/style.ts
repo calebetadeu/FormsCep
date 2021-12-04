@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const FormContainer= styled.div ` 
  
-        
+      
  h1{
    border-bottom: 1px solid white;
    color: #3d3d3d;
@@ -33,13 +33,16 @@ export const FormContainer= styled.div `
    padding: 10px;
    width: 100%;
    &:focus {
-    color: #000;
-    font-weight: 500;
+    color: #fff;
+    font-weight: 600;
     border-bottom: 2px solid ;
     transition: all 0.2s ease-in;
     transform: scaleX(1.02) translateY(-3px);   
     opacity: 6;
-    background-color: #E16F7C ;
+    background-color: #4F646F;
+    ::placeholder{
+      color: #C0C5C1;
+    }
     }
  }
 

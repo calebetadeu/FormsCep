@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import { useRouter } from 'next/router';
+import React, { useContext, useState } from 'react';
 import { FormsContext } from '../../context/FormsCadasterContext';
 import Button from '../Button';
 import { Input } from '../Input';
@@ -6,10 +7,14 @@ import * as S from './style';
 
 export default function FormsCadaster() {
    
-    const { checkCep,register,errors,setError,handleSubmit} = useContext(FormsContext)
-    
-  function handlelogin(values) {
-      console.log(values)
+    const { checkCep,handleSubmit,errors,register,message} = useContext(FormsContext)
+    const [ messageError,setMessageError ] = useState('')
+    const router= useRouter()
+
+  
+  function handlelogin(e) {
+    router.push('/test')
+     
   }
     return (
         <S.Form>
@@ -23,13 +28,23 @@ export default function FormsCadaster() {
      
      /> 
      <Input 
-     {...register("cep")}
+     {...register("cep",{
+       required:true,
+      maxLength:8,
+      
+     } 
+     )} 
      name="cep"
      label="Cep"
      placeholder="Cep"
-     onBlur={ checkCep }
-     />
-
+    onBlur={ checkCep }
+     
+    />
+       
+{errors.cep &&  (
+         <span  > {messageError} </span>
+       )}
+   
    <Input
    
    {...register("neighborhood")}
@@ -66,7 +81,7 @@ export default function FormsCadaster() {
      />
       
       
-   <Button  >
+   <Button   >
         Enviar
      </Button>
      
