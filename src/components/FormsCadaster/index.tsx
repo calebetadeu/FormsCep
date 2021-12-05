@@ -10,7 +10,7 @@ export default function FormsCadaster() {
     const { checkCep,
       handleSubmit,
       register,message,
-      handleOnChangeError,
+      handleOnChangeUser,
       inputController,
       handlePagination,
       buttonController
@@ -30,7 +30,9 @@ export default function FormsCadaster() {
         name="name"
         label="Nome*"
         placeholder="Nome*"
-     
+         htmlFor='name'
+         inputMode='text'
+         autoComplete=''
      /> 
      <Input 
      {...register("cep",{
@@ -38,12 +40,14 @@ export default function FormsCadaster() {
      )} 
      name="cep"
      label="Cep*"
-     placeholder="Cep*"
+     placeholder="00000-000"
     onBlur={ checkCep }
-     onChange={handleOnChangeError}
-     type="number"
+     onChange={handleOnChangeUser}
+     autoComplete='cc-number'
+     inputMode='numeric'
      value={inputController}
-     maxLength={8}
+     maxLength={9}
+     htmlFor='zipCode'
     />
        
 
@@ -56,7 +60,7 @@ export default function FormsCadaster() {
    label="Bairro"
    name="neighborhood"
    placeholder="Bairro"
-      
+     htmlFor='neighborhood' 
 
    />
      <Input 
@@ -64,25 +68,29 @@ export default function FormsCadaster() {
    label="Cidade "
    name="cidade"
    placeholder="Cidade"
+   htmlFor='city'
      />   
      <Input 
      {...register("andress")}
      placeholder="Logradouro"
       name="andress"
       label="Endereço"
+      htmlFor='andress'
      />
      <Input 
     {...register("uf")}
     placeholder="Uf"
     name="uf"
     label="Estado"
+    htmlFor='uf'
      />
       
       <Input 
       {...register("andressNumber")}
      placeholder="Número"
-    name="numero"
+    name="andressNumber"
     label="Complemento"
+    htmlFor='andressNumber'
      />
       
       

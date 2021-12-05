@@ -15,7 +15,7 @@ interface FormsContextData  {
   buttonController:boolean
   inputController:string
   handlePagination:(e:React.SyntheticEvent)=>void;
- handleOnChangeError :(e:React.SyntheticEvent)=>void
+ handleOnChangeUser :(e:React.SyntheticEvent)=>void
   message:string;
    errors:{ 
       name?: FieldError  
@@ -46,7 +46,7 @@ export function FormsProvider({children} : FormsProviderProps ){
 
 useEffect(() => {
       checkCep
-      handleOnChangeError
+      handleOnChangeUser
     }, [])
 
 
@@ -60,9 +60,16 @@ useEffect(() => {
      
   }
  
-     function handleOnChangeError(e:React.SyntheticEvent  ){
-        const target=e.target as HTMLInputElement
+ 
+     function handleOnChangeUser(e:React.SyntheticEvent  ){
+          const target=e.target as HTMLInputElement
         const {maxLength,value}=target
+         function normalizeZipCodeNumber(e:React.SyntheticEvent){
+          return value.replace(/\s/g,"").match(/.{1,4}/g)?.join("").substring(0,19) || ""
+         }
+      
+      function handleOnChangeError (){
+       
         if(!value && value.length<=7 ){
           setButtonController(true) 
         }
@@ -70,23 +77,23 @@ useEffect(() => {
          setInputController(value.slice(0,maxLength))
          setMessage('')
         }
-        else if(value.length<=8){
+        else if(value.length<=9){
           setInputController(null)
          }
         else if ( value.length==8){
           setMessage('')
         }
+      }
+    
   } 
    
 const checkCep= async (e:React.SyntheticEvent )=>{
     
    let target= e.target as HTMLInputElement;
-    const cep= target.value.replace(/\D/g,'');
+    const zipCode= target.value.replace(/\D/g,'');
 
-    if(!target.value){
-      
-      setMessage('Campo Obrigatório')
-           
+    if(!target.value){  
+      setMessage('Campo Obrigatório')       
         
     }
     else{
@@ -94,7 +101,7 @@ const checkCep= async (e:React.SyntheticEvent )=>{
     }
    
     try{ 
-      const response= await api.get(`https://viacep.com.br/ws/${cep}/json`)
+      const response= await api.get(`https://viacep.com.br/ws/${zipCode}/json`)
    const data:AndressProps=await response.data
         
         if(!data.cep ){
@@ -139,7 +146,7 @@ const checkCep= async (e:React.SyntheticEvent )=>{
         handleSubmit,
         setMessage
         ,message,
-        handleOnChangeError,
+        handleOnChangeUser,
         inputController,
         handlePagination,
         buttonController
