@@ -3,6 +3,7 @@ import { InputProps } from '../../types/Inputs'
 import * as S from './style'
 
 
+
 const InputBase:ForwardRefRenderFunction<HTMLInputElement, InputProps >=({label,
     name ,
     placeholder,

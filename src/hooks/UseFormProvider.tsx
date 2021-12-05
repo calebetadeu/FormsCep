@@ -1,6 +1,6 @@
 
 import { useRouter } from 'next/router';
-import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react';
+import React, { createContext, Dispatch, ReactNode, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { FieldError, useForm, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import api from '../services/api';
 import type { AndressProps, FormInputs } from '../types/Forms';
@@ -15,6 +15,7 @@ interface FormsContextData  {
   buttonController:boolean
   inputController:string
   handlePagination:(e:React.SyntheticEvent)=>void;
+  handleKeyUp:(e:React.FormEvent<HTMLInputElement>)=>void
  handleOnChangeUser :(e:React.SyntheticEvent)=>void
   message:string;
    errors:{ 
@@ -47,6 +48,7 @@ export function FormsProvider({children} : FormsProviderProps ){
 useEffect(() => {
       checkCep
       handleOnChangeUser
+      
     }, [])
 
 
@@ -56,18 +58,22 @@ useEffect(() => {
      if(!pagination){
        router.push('/test')
     }
+ }
 
-     
-  }
- 
- 
+    const handleKeyUp= useCallback((e:React.FormEvent<HTMLInputElement>)=>{
+        const target=e.currentTarget.value
+       let value=e.currentTarget.value
+       value=value.replace(/\D/g,"")
+        value=value.replace(/^(\d{5})(\d)/,"$1-$2")
+        e.currentTarget.value=value
+        },[])
+   
      function handleOnChangeUser(e:React.SyntheticEvent  ){
           const target=e.target as HTMLInputElement
         const {maxLength,value}=target
-         function normalizeZipCodeNumber(e:React.SyntheticEvent){
-          return value.replace(/\s/g,"").match(/.{1,4}/g)?.join("").substring(0,19) || ""
-         }
-      
+
+ 
+   
       function handleOnChangeError (){
        
         if(!value && value.length<=7 ){
@@ -149,7 +155,8 @@ const checkCep= async (e:React.SyntheticEvent )=>{
         handleOnChangeUser,
         inputController,
         handlePagination,
-        buttonController
+        buttonController,
+        handleKeyUp
         }}>
                 {children}
         </FormsContext.Provider>

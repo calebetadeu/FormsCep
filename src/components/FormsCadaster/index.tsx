@@ -5,15 +5,18 @@ import Button from '../Button';
 import { Input } from '../Input';
 import * as S from './style';
 
+
+
 export default function FormsCadaster() {
    
-    const { checkCep,
-      handleSubmit,
-      register,message,
+    const { 
+      checkCep,
+     register,
+     message,
       handleOnChangeUser,
       inputController,
-      handlePagination,
-      buttonController
+      buttonController,
+      handleKeyUp
     } = useContext(FormsContext)
    
     const router= useRouter()
@@ -46,6 +49,7 @@ export default function FormsCadaster() {
      autoComplete='cc-number'
      inputMode='numeric'
      value={inputController}
+     onKeyUp={handleKeyUp}
      maxLength={9}
      htmlFor='zipCode'
     />
