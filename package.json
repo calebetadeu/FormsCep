@@ -14,6 +14,7 @@
     "axios": "^0.24.0",
     "eslint-plugin-react-hooks": "^4.2.1-beta-a65ceef37-20211130",
     "next": "12.0.4",
+    "prettier": "^2.5.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.20.5",
