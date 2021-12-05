@@ -46,7 +46,7 @@ export default function FormsCadaster() {
      placeholder="00000-000"
     onBlur={ checkCep }
      onChange={handleOnChangeUser}
-     autoComplete='cc-number'
+     
      inputMode='numeric'
      value={inputController}
      onKeyUp={handleKeyUp}
