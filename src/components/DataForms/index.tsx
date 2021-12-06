@@ -11,25 +11,26 @@ export default function WelcomePage({
   andressNumber,
 }: UserProps) {
   return (
-    <S.dataForm>
-      <h1>Obrigado </h1>
-      <h1>Dados:</h1>
-      <div className="sectionInfo">
-        <ul>
-          <li>Nome:</li>
-          <span>{name}</span>
-          <li>Cidade: </li>
-          <span> {city}</span>
-          <li>Bairro: </li>
-          <span>{neighborhood}</span>
-          <li>Endereço: </li>
-          <span>{andress}</span>
-          <li>Estado: </li>
-          <span>{uf}</span>
-          <li>Complemento: </li>
-          <span>{andressNumber}</span>
-        </ul>
-      </div>
-    </S.dataForm>
+    <>
+      <S.dataForm>
+        <header>
+          <h1>Obrigado! <br /> <span>{name}</span>  </h1> 
+        </header>
+        <div className="sectionInfo">
+          <ul>
+            <li>Cidade: </li>
+            <span> {city}</span>
+            <li>Bairro: </li>
+            <span>{neighborhood}</span>
+            <li>Endereço: </li>
+            <span>{andress}</span>
+            <li>Estado: </li>
+            <span>{uf}</span>
+            <li>Complemento: </li>
+            <span>{andressNumber}</span>
+          </ul>
+        </div>
+      </S.dataForm>
+    </>
   );
 }

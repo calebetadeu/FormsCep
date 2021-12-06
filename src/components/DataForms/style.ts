@@ -13,11 +13,11 @@ export const dataForm = styled.div`
   .sectionInfo {
     margin-top: 1rem;
   }
-  h1 {
+  header {
     color: black;
     display: flex;
     margin: 1rem auto;
-    font-size: 25px;
+    font-size: 20px;
     margin-top: 2rem;
   }
   ul {

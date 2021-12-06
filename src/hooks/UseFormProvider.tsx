@@ -7,14 +7,14 @@ import React, {
   SyntheticEvent,
   useCallback,
   useEffect,
-  useState,
+  useState
 } from "react";
 import {
   FieldError,
   SubmitHandler,
   useForm,
   UseFormHandleSubmit,
-  UseFormRegister,
+  UseFormRegister
 } from "react-hook-form";
 import api from "../services/api";
 import type { AndressProps, FormInputs, UserProps } from "../types/Forms";
@@ -53,7 +53,12 @@ export const FormsContext = createContext<FormsContextData>(
 
 export function FormsProvider({ children }: FormsProviderProps) {
   const [buttonController, setButtonController] = useState(true);
+  const [inputController, setInputController] = useState(null);
   const [message, setMessage] = useState("");
+  const [pagination, setPagination] = useState(false);
+  const router = useRouter();
+  const [user, setUser] = useState<UserProps>({});
+
   const {
     register,
     setValue,
@@ -63,10 +68,6 @@ export function FormsProvider({ children }: FormsProviderProps) {
     handleSubmit,
     resetField,
   } = useForm<FormInputs>();
-  const [inputController, setInputController] = useState(null);
-  const router = useRouter();
-  const [pagination, setPagination] = useState(false);
-  const [user, setUser] = useState<UserProps>({});
 
   useEffect(() => {
     onBlurZipCode;
@@ -74,8 +75,11 @@ export function FormsProvider({ children }: FormsProviderProps) {
   }, []);
 
   const handlePagination: SubmitHandler<InputProps> = (data) => {
-    setUser(data);
-    router.push("/test");
+    if (pagination) {
+      setUser(data);
+    
+      router.push("/userdata");
+    }
   };
 
   const handleKeyUp = useCallback((e: React.FormEvent<HTMLInputElement>) => {
@@ -90,18 +94,16 @@ export function FormsProvider({ children }: FormsProviderProps) {
     const target = e.target as HTMLInputElement;
     const { maxLength, value } = target;
 
-    function handleOnChangeError() {
-      if (!value && value.length <= 7) {
-        setButtonController(true);
-      }
-      if (value.length > 8) {
-        setInputController(value.slice(0, maxLength));
-        setMessage("");
-      } else if (value.length <= 9) {
-        setInputController(null);
-      } else if (value.length == 8) {
-        setMessage("cep");
-      }
+    if (!value && value.length <= 7) {
+      setButtonController(true);
+    }
+    if (value.length > 8) {
+      setInputController(value.slice(0, maxLength));
+      setMessage("");
+    } else if (value.length <= 9) {
+      setInputController(null);
+    } else if (value.length == 8) {
+      setMessage("cep");
     }
   }
 
@@ -140,18 +142,17 @@ export function FormsProvider({ children }: FormsProviderProps) {
         resetField("uf");
         setInputController(null);
       }
-      if (data.cep) {
-        setValue("andress", data.logradouro);
-        setValue("neighborhood", data.bairro);
-        setValue("city", data.localidade);
-        setValue("uf", data.uf);
-        setMessage("");
-        setButtonController(false);
-        if (!data.bairro) {
-          return setFocus("neighborhood");
-        } else {
-          setFocus("andressNumber");
-        }
+       
+      setValue("andress", data.logradouro);
+      setValue("neighborhood", data.bairro);
+      setValue("city", data.localidade);
+      setValue("uf", data.uf);
+      setMessage("");
+      setButtonController(false);
+      if (!data.bairro) {
+        return setFocus("neighborhood");
+      } else {
+        setFocus("andressNumber");
       }
     } catch (e) {
       console.log(e);

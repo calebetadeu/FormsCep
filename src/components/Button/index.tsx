@@ -2,9 +2,9 @@ import React, { ReactNode } from "react";
 import * as S from "./style";
 
 interface ButtonProps {
-  children: ReactNode;
+  children?: ReactNode;
   OnClick?: () => void;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export default function Button({ children, OnClick, disabled }: ButtonProps) {
