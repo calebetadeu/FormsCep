@@ -1,5 +1,7 @@
+import { useRouter } from "next/router";
 import React from "react";
 import type { UserProps } from "../../types/Forms";
+import Button from "../Button";
 import * as S from "./style";
 
 export default function WelcomePage({
@@ -10,6 +12,10 @@ export default function WelcomePage({
   uf,
   andressNumber,
 }: UserProps) {
+  const router = useRouter();
+  const handleBackToPage = () => {
+    router.push("/");
+  };
   return (
     <>
       <S.dataForm>
@@ -32,6 +38,7 @@ export default function WelcomePage({
             <span>{andressNumber}</span>
           </ul>
         </div>
+        <Button OnClick={handleBackToPage}>Voltar</Button>
       </S.dataForm>
     </>
   );

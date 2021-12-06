@@ -7,14 +7,14 @@ import React, {
   SyntheticEvent,
   useCallback,
   useEffect,
-  useState,
+  useState
 } from "react";
 import {
   FieldError,
   SubmitHandler,
   useForm,
   UseFormHandleSubmit,
-  UseFormRegister,
+  UseFormRegister
 } from "react-hook-form";
 import api from "../services/api";
 import type { AndressProps, FormInputs, UserProps } from "../types/Forms";
@@ -108,6 +108,7 @@ export function FormsProvider({ children }: FormsProviderProps) {
   const onBlurName = (e: React.SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
     const { value } = target;
+
     if (!value) {
       setError("name", {
         message: "Campo Obrigatório",
