@@ -14,7 +14,9 @@ export default function WelcomePage({
     <>
       <S.dataForm>
         <header>
-          <h1>Obrigado! <br /> <span>{name}</span>  </h1> 
+          <h1>
+            Obrigado! <br /> <span>{name}</span>{" "}
+          </h1>
         </header>
         <div className="sectionInfo">
           <ul>
